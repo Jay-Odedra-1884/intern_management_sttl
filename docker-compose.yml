@@ -36,17 +36,16 @@ services:
       - "9090:8080"
 
     environment:
-      # 🔥 Connect Hasura to Postgres
-      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:vidhikasttl@postgres:5432/intern_management
-
-      # Enable console
+      
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:vidhikasttl@postgres:5432/intern_db
+   
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
 
-      # Dev mode (good for development)
+    
       HASURA_GRAPHQL_DEV_MODE: "true"
 
-      # Admin secret (required for security)
-      HASURA_GRAPHQL_ADMIN_SECRET: vidhikasttl
+      
+      HASURA_GRAPHQL_ADMIN_SECRET: sttl6
 
 volumes:
   postgres_data:

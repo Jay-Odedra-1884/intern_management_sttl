@@ -22,8 +22,11 @@ export default function AnnouncementsPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/announcements').then(res => res.json()).then(setData).finally(() => setLoading(false))
-  }, [])
+    fetch('/api/announcements')
+  .then(res => res.text())
+  .then(text => { if (text) setData(JSON.parse(text)) })
+  .catch(err => console.error(err))
+  .finally(() => setLoading(false))  }, [])
 
   const items = data?.announcements ?? []
 

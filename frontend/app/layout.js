@@ -14,9 +14,10 @@ export default function RootLayout({ children }) {
           <Sidebar />
           <main style={{
             flex: 1,
-            marginLeft: '240px',
+            marginLeft: '260px',
             padding: '36px 40px',
-            maxWidth: '1200px',
+            minHeight: '100vh',
+            background: 'var(--bg-base)',
           }}>
             {children}
           </main>
