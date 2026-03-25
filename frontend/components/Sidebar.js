@@ -83,7 +83,6 @@ const nav = [
 export default function Sidebar() {
   const pathname = usePathname()
   const { data:session, status } = useSession();
-  console.log(session);
   
 
   return (
