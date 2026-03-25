@@ -3,9 +3,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { useSession } from 'next-auth/react'
 
-// ─────────────────────────────────────────────
+
 // Role permission helpers
-// ─────────────────────────────────────────────
 function useRole() {
   const { data: session } = useSession()
   const role = session?.user?.role ?? ''
@@ -22,9 +21,8 @@ function useRole() {
   }
 }
 
-// ─────────────────────────────────────────────
+
 // Skill score categories
-// ─────────────────────────────────────────────
 const SKILL_FIELDS = [
   { key: 'technical_skill_score',   label: 'Technical Skill' },
   { key: 'problem_solving_score',   label: 'Problem Solving' },
@@ -36,9 +34,8 @@ const SKILL_FIELDS = [
   { key: 'ownership_score',         label: 'Ownership' },
 ]
 
-// ─────────────────────────────────────────────
+
 // Helpers
-// ─────────────────────────────────────────────
 function scoreColor(s) {
   return s >= 8 ? '#1a3aff' : s >= 5 ? '#3b82f6' : '#93c5fd'
 }
@@ -51,9 +48,7 @@ function calcAutoOverall(form) {
   return Math.round(vals.reduce((a, b) => a + b, 0) / vals.length)
 }
 
-// ─────────────────────────────────────────────
-// ScorePill
-// ─────────────────────────────────────────────
+
 function ScorePill({ score }) {
   const color = scoreColor(score)
   return (
@@ -73,9 +68,7 @@ function ScorePill({ score }) {
   )
 }
 
-// ─────────────────────────────────────────────
-// RadarChart — spider chart for skill scores
-// ─────────────────────────────────────────────
+
 function RadarChart({ ev }) {
   const skills = SKILL_FIELDS.map(f => ({ label: f.label.split(' ')[0], value: ev[f.key] ?? 0 }))
   const n = skills.length
@@ -127,9 +120,6 @@ function RadarChart({ ev }) {
   )
 }
 
-// ─────────────────────────────────────────────
-// ScoreOverviewChart — horizontal bars per intern
-// ─────────────────────────────────────────────
 function ScoreOverviewChart({ evaluations }) {
   const map = {}
   evaluations.forEach(ev => {
@@ -207,9 +197,7 @@ function ScoreOverviewChart({ evaluations }) {
   )
 }
 
-// ─────────────────────────────────────────────
-// InternProgressChart — line chart for single intern
-// ─────────────────────────────────────────────
+
 function InternProgressChart({ evaluations }) {
   if (evaluations.length < 2) return null
   const sorted = [...evaluations].sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
@@ -264,9 +252,7 @@ function InternProgressChart({ evaluations }) {
   )
 }
 
-// ─────────────────────────────────────────────
-// ScoreSlider — reusable slider row
-// ─────────────────────────────────────────────
+
 function ScoreSlider({ label, fieldKey, value, onChange, disabled }) {
   const val = value === '' || value == null ? 0 : parseInt(value)
   const color = val > 0 ? scoreColor(val) : 'var(--text-muted)'
@@ -291,9 +277,7 @@ function ScoreSlider({ label, fieldKey, value, onChange, disabled }) {
   )
 }
 
-// ─────────────────────────────────────────────
-// EvalModal — Add / Edit
-// ─────────────────────────────────────────────
+
 const BLANK = {
   intern_id: '', evaluator_id: '', period: '',
   technical_skill_score: 0, problem_solving_score: 0, communication_score: 0,
@@ -509,9 +493,7 @@ function EvalModal({ mode, initial, interns, evaluators, onClose, onSave, userRo
   )
 }
 
-// ─────────────────────────────────────────────
-// RoleBadge
-// ─────────────────────────────────────────────
+
 function RoleBadge({ role }) {
   const map = {
     admin:  { label: 'Admin · Full Access',          color: '#1a3aff', bg: '#e8eeff' },
@@ -527,9 +509,7 @@ function RoleBadge({ role }) {
   )
 }
 
-// ─────────────────────────────────────────────
-// EvaluationCard — detailed card with all fields
-// ─────────────────────────────────────────────
+
 function EvaluationCard({ ev, canEdit, onEdit, showInternName }) {
   const [expanded, setExpanded] = useState(false)
   const hasSkills = SKILL_FIELDS.some(f => ev[f.key] > 0)
@@ -716,7 +696,7 @@ export default function EvaluationsPage() {
     },
   })
 
-  // ─── INTERN VIEW (read-only, own data only) ───
+  
   if (isIntern) {
     const myAvg = evals.length
       ? (evals.reduce((s, e) => s + (e.overall_score ?? 0), 0) / evals.length).toFixed(1)
@@ -771,7 +751,7 @@ export default function EvaluationsPage() {
     )
   }
 
-  // ─── ADMIN / MENTOR / HR VIEW ───
+
   return (
     <div>
       {/* Header */}
