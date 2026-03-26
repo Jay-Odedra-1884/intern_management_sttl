@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { useFormik } from "formik";
 import { z } from "zod";
 import { createUser, updateUser } from "@/services/UserApi";
+import { X } from "lucide-react";
 
 const userSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -88,9 +89,7 @@ export default function UserModal({ mode, initialData, onClose, onSuccess }) {
             </p>
           </div>
           <button onClick={onClose} className="btn-icon p-1 hover:bg-gray-100 rounded-md transition-colors" style={{ flexShrink: 0, marginLeft: "12px" }}>
-            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
+            <X size={20} />
           </button>
         </div>
 
