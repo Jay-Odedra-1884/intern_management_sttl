@@ -40,7 +40,7 @@ function UsersPage() {
             <h2 className="text-2xl font-bold">Manage Users</h2>
             <button 
               onClick={() => setIsAdding(true)}
-              className="bg-[#1a3aff] text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-[#1a3aff]/30 hover:bg-[#1a3aff]/90 transition-all duration-200"
+              className="bg-(--accent) text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-(--accent-2) hover:bg-(--accent-2) transition-all duration-200"
             >
               Add User
             </button>
@@ -83,14 +83,14 @@ function UsersPage() {
                         <div className="flex gap-3 justify-end">
                           <button
                             type="button"
-                            className="px-4 py-2 text-sm font-semibold text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+                            className="px-4 py-2 text-sm font-semibold text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
                             onClick={() => setConfirmDelete(null)}
                           >
                             Cancel
                           </button>
                           <button
                             type="button"
-                            className="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-red-600 transition-all duration-200"
+                            className="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer hover:bg-red-600 transition-all duration-200"
                             onClick={() => {
                               deleteUser(user.id)
                                 .then((data) => {
