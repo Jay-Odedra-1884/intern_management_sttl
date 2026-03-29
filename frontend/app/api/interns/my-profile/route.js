@@ -23,13 +23,26 @@ const GET_MY_INTERNS = `
       userByUserId { id name email }
       department   { id name }
       user         { id name }
+      evaluations(order_by: { created_at: desc }, limit: 5) {
+        id period score overall_score feedback mentor_feedback
+        strengths improvement_areas
+        technical_skill_score problem_solving_score communication_score
+        teamwork_score initiative_score time_management_score
+        learning_ability_score ownership_score
+        user { name }
+        created_at
+      }
+      tasks(order_by: { created_at: desc }, limit: 10) {
+        id title description status priority due_date created_at
+      }
+      attendances(order_by: { date: desc }, limit: 14) {
+        id date check_in check_out status notes
+      }
     }
   }
 `
 
 export async function GET(req) {
-  // Allow all roles — intern, mentor, admin, hr can all call this
-  // but it always returns records filtered to the logged-in user only
   const session = await requireAuth(req, ['admin', 'hr', 'mentor', 'intern'])
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
