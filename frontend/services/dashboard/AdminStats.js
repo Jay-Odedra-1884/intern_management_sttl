@@ -1,6 +1,6 @@
 export const getAdminStats = async () => {
     try {
-        const res = await fetch("http://localhost:3000/api/dashboard")
+        const res = await fetch("/api/dashboard")
         const data = await res.json()
         return data
     } catch (error) {
@@ -10,7 +10,7 @@ export const getAdminStats = async () => {
 
 export const getAllUsers = async () => {
     try {
-        const res = await fetch("http://localhost:3000/api/users")
+        const res = await fetch("/api/users")
         const data = await res.json()
         return data
     } catch (error) {

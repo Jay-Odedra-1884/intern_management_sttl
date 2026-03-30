@@ -1,13 +1,5 @@
-import Link from 'next/link'
-import React from 'react'
+import { redirect } from 'next/navigation'
 
-function page() {
-  return (
-    //TODO: Landing page
-    <div>TODO:Landing page
-      <Link href="/dashboard" className='text-blue-500 ml-10'>Dashboard</Link>
-    </div>
-  )
+export default function RootPage() {
+  redirect('/auth/login')
 }
-
-export default page
